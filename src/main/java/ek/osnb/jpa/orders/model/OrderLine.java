@@ -1,5 +1,6 @@
 package ek.osnb.jpa.orders.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import ek.osnb.jpa.common.model.BaseEntity;
 
 import jakarta.persistence.Entity;
@@ -15,8 +16,9 @@ public class OrderLine extends BaseEntity {
     private double unitPrice;
     private int quantity;
 
+    @JsonBackReference
     @ManyToOne(optional = false)
-    @JoinColumn(name = "order_id") //FK-kolonne i order_line
+    @JoinColumn(name = "order_id")
     private Order order;
 
 
