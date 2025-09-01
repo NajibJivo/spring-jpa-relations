@@ -18,7 +18,11 @@ public class Order extends BaseEntity {
     private OrderStatus status;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,  orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "order",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
+            orphanRemoval = true
+    )
     private List<OrderLine> orderLines = new ArrayList<>();
 
 

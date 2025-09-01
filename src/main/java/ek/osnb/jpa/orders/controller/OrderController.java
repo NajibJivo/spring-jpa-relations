@@ -31,11 +31,13 @@ public class OrderController {
         }
     }
 
+    // Post = Create
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(order));
     }
 
+    // PUT = Update
     @PutMapping("/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order order) {
         try {
@@ -45,6 +47,7 @@ public class OrderController {
         }
     }
 
+    // DELETE = Delete
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
         try {
