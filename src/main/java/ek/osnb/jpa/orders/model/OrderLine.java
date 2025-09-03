@@ -8,42 +8,38 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.util.List;
+
 @Entity
 @Table(name = "order_line")
 public class OrderLine extends BaseEntity {
 
-    private String product;
-    private double unitPrice;
+
+
+    @ManyToOne
+    private Product product;
     private int quantity;
 
     @JsonBackReference
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
 
     public OrderLine() {}
 
-    public OrderLine(String product, double unitPrice, int quantity) {
+    public OrderLine(Product product, double unitPrice, int quantity) {
         this.product = product;
-        this.unitPrice = unitPrice;
         this.quantity = quantity;
     }
 
-    public String getProduct() {
+
+    public Product getProducts () {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProducts (Product product) {
         this.product = product;
-    }
-
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
     }
 
     public int getQuantity() {
