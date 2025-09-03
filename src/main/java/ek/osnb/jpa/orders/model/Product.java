@@ -32,6 +32,9 @@ public class Product {
         this.price = price;
     }
 
+    /* Holder bidirektionel relation i sync (i hukommelsen):
+    * ingen dubletter i join-tabellen,
+    * og at vi kun synker den anden side én gang. */
     public void addCategory(Category category) {
         if (category == null) return;
         if (this.categories.add(category)) {

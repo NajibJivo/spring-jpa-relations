@@ -1,14 +1,11 @@
 package ek.osnb.jpa.orders.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import ek.osnb.jpa.common.model.BaseEntity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-import java.util.List;
 
 @Entity
 @Table(name = "order_line")
@@ -16,29 +13,31 @@ public class OrderLine extends BaseEntity {
 
 
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
     private int quantity;
 
-    @JsonBackReference
-    @ManyToOne
+
+    @JsonBackReference("order-lines")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
 
     public OrderLine() {}
 
-    public OrderLine(Product product, double unitPrice, int quantity) {
+    public OrderLine(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
 
 
-    public Product getProducts () {
+    public Product getProduct () {
         return product;
     }
 
-    public void setProducts (Product product) {
+    public void setProduct (Product product) {
         this.product = product;
     }
 
